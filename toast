@@ -8,7 +8,7 @@ if [[ $os == darwin* ]]; then
 	command="display notification \"$description\" with title \"$title\" sound name \"frog\""
 	osascript -e "$command"
 elif [[ $os == linux* ]]; then
-	"notify-send $title $description"
+	notify-send $title $description
 else
 	echo 'OS Toast not supported'
 fi
