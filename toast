@@ -1,0 +1,7 @@
+#!usr/bin/env bash
+title=$1
+description=$2
+command="display notification \"$description\" with title \"$title\" sound name \"frog\""
+osascript -e "$command"
+
+
