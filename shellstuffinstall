@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+function st_path() {
+ echo '# shellstuff path' >> $1
+ stuffdir=pwd
+ echo "export PATH=\"\$PATH:$($stuffdir)"\" >> $1
+ echo "successfuly installed in $1 for path $($stuffdir)"
+}
+
+
+if [[ -f $HOME/.zshrc ]]; then
+	st_path "$HOME/.zshrc"
+fi
+
+if [[ -f $HOME/.bashrc ]]; then
+	st_path "$HOME/.bashrc"
+fi
