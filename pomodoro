@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+read -ep 'How many minutes the sessions should last?'$'\n' minutes

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+if [[ -e $1 ]]; then
+	sed -i -e '1i$2\' $1
+fi
