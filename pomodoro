@@ -1,3 +1,13 @@
 #!/usr/bin/env bash
 
-read -ep 'How many minutes the sessions should last?'$'\n' minutes
+sleepAndToast() {
+ local min=$1
+ sleep  "$min"m 
+
+ toast 'Pomodoro:' "Session of $min minute(s) finished"	
+}
+
+read -ep 'How many minutes the sessions should last?'$'\n' minutes;
+minutes="${minutes//[^0-9]/}"
+
+sleepAndToast $minutes &
