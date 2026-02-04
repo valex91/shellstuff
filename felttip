@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+color() {
+ local color=$1
+ local output=$2
+ echo -e "\e[38;05;${color}m $output"
+}
+
+colorToCode() {
+ local colorWord=$1
+
+ case $colorWord in
+	 red) echo 1;;
+	 green) echo 2;;
+	 brown) echo 3;;
+	 blue) echo 4;;
+	 purple) echo 5;;
+	 cerulean) echo 6;;
+	 *) echo 16;;
+ esac
+}
+
+if [[ $1 =~ ^[0-9]+$ ]] && [[ $1 -le 255 ]]; then
+	color "$1" "$2"
+elif [[ -n "$1" ]]; then
+	color_code=$(colorToCode $1)
+	color "$color_code" "$2"
+fi
