@@ -4,7 +4,7 @@ function st_path() {
  echo '# shellstuff path' >> $1
  stuffdir=pwd
  echo "export PATH=\"\$PATH:$($stuffdir)"\" >> $1
- echo "successfuly installed in $1 for path $($stuffdir)"
+ felttip green  "successfuly installed in $1 for path $($stuffdir)"
 }
 
 

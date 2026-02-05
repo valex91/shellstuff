@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+if [[ ! -n $1 ]]; then
+  felttip red "I need a path as an argument" 2>&1
+  exit 1
+fi
+
+readarray -t extensions < <(ls $1 | cut -s -d . -f 2-)
+if [[ ${#extensions[@]} ==  0 ]]; then
+	felttip green "No ordering needed"
+	exit 0
+fi
+
+IFS=,
+felttip green "found ${#extensions[@]} extensions: $(echo "${extensions[*]}" | tr '[:upper:]' '[:lower:]')"
+unset IFS
+
+
+
+for ext in ${extensions[@]}; do
+	mkdir $ext 2>/dev/null
+	mv *.$ext $ext
+done
+
+felttip green "Content of $1 has been ordered in folders by extension"
