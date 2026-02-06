@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
 
+if [[ ! -n $1 ]]; then
+	felttip red "name of file to create needed" 2>&1
+	exit 1
+fi
+
 echo '#!/usr/bin/env bash' >> "$1" 
 chmod +x $1

@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+input=${1:-$(cat)}
+
+if [[ ! -n $input ]]; then
+	felttip red "argument or STIN needed"
+	exit 1
+fi
+
+indexToRainbow() {
+	local maxd=$(( $1 % 7))
+	case $maxd in
+		0) echo 1;;
+		1) echo 202;;
+		2) echo 226;;
+		3) echo 28;;
+		4) echo 21;;
+		5) echo 218;;
+		6) echo 141;;
+	esac
+}
+
+readarray -t wordInLetters < <(echo -n $input | fold -w 1)
+
+wordLength="${#wordInLetters[@]}"
+result=""
+for ((i=0; i <= wordLength; i++ )); do
+	result+=$(felttip "$(indexToRainbow $i)" "${wordInLetters[i]}")
+done
+
+echo -n $result
+echo 
