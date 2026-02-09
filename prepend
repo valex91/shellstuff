@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
+shell_stuff_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-if [[ -e $1 ]]; then
-	sed -i -e '1i$2\' $1
-fi
+source $shell_stuff_dir/lib/validators
+
+file=$(requireArgument "$1" 'need a file') || exit 1
+input=$(requireArgument "$2" 'need txt to prepend') || exit 1
+
+sed -i -e "1i$input\\" "$file"

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-if [[ ! -n $1 ]]; then
-	felttip red "name of file to create needed" 2>&1
-	exit 1
-fi
+shell_stuff_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source $shell_stuff_dir/lib/validators
+
+file=$(requireArgument "$1" 'name of file to create needed') || exit 1
 
 echo '#!/usr/bin/env bash' >> "$1" 
 chmod +x $1

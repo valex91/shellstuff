@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+requireArgument() {
+    local value="$1"
+    local secondArg="$2"
+    local allowStdin=false
+    local message="Argument required"
+
+    if [[ $secondArg == "--or-stdin" ]]; then
+        allowStdin=true
+    elif [[ -n $secondArg ]]; then
+        message="$secondArg"
+    fi
+
+    if [[ -n $value ]]; then
+        echo "$value"
+    elif $allowStdin && [[ ! -t 0 ]]; then
+        cat
+    else
+        felttip red "$message" >&2
+        exit 1
+    fi
+}
+
+
+
+

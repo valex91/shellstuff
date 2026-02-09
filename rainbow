@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 
-input=${1:-$(cat)}
+shell_stuff_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-if [[ ! -n $input ]]; then
-	felttip red "argument or STIN needed"
-	exit 1
-fi
+source $shell_stuff_dir/lib/validators
+input=$(requireArgument "$1" --or-stdin) || exit 1
 
 indexToRainbow() {
 	local maxd=$(( $1 % 7))
