@@ -3,7 +3,7 @@
 color() {
  local color=$1
  local output=$2
- echo -e "\e[38;05;${color}m $output"
+ echo "\e[38;05;${color}m$output"
 }
 
 colorToCode() {
@@ -20,9 +20,12 @@ colorToCode() {
  esac
 }
 
+result=""
 if [[ $1 =~ ^[0-9]+$ ]] && [[ $1 -le 255 ]]; then
-	color "$1" "$2"
+	result+=$(color "$1" "$2")
 elif [[ -n "$1" ]]; then
 	color_code=$(colorToCode $1)
-	color "$color_code" "$2"
+	result+=$(color "$color_code" "$2")
 fi
+
+echo -e $result

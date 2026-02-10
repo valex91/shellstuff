@@ -18,7 +18,7 @@ indexToRainbow() {
 	esac
 }
 
-readarray -t wordInLetters < <(echo -n $input | fold -w 1)
+readarray -t wordInLetters < <(echo -n "$input" | fold -w 1)
 
 wordLength="${#wordInLetters[@]}"
 result=""
@@ -26,5 +26,4 @@ for ((i=0; i <= wordLength; i++ )); do
 	result+=$(felttip "$(indexToRainbow $i)" "${wordInLetters[i]}")
 done
 
-echo -n $result
-echo 
+echo "$result"
