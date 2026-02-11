@@ -1,6 +1,6 @@
 # What next
 
-Rainbow is created, but the output is not as I wanted because it's split due to how i coded felttip so next:
+If I manage to get the necessary knowledge I want to start creating the fundations for Scoundrel business logic so:
 
-- sort out the print 1 by 1 in rainbow
-- explore how to create, parse and use flags ( eg felttip -doSomething )
+- create a card deck
+- shuffle the card deck
