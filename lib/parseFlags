@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+parseFlags() {
+	# annoying bit in bash you cant return complex data from fn
+	# which result in us having to pass a ref as first argument to fill as side effect
+ 	declare -n resultRef=$1
+	declare -n justArgumentsRef=$2
+	shift
+	shift
+	
+	local _allArgs=("$@")
+	index=0
+
+	local skip=false
+
+	for flag in "$@"; do
+	
+	if [[ $skip == true ]]; then
+		skip=false
+		(( index++ ))
+		continue
+	fi	
+
+	if [[ $flag == '-'* ]]; then
+	lookValueAhead=${_allArgs[(($index+1))]}
+		if [[ -n $lookValueAhead  && ! $lookValueAhead == '-'*  ]]; then
+		  resultRef[$flag]="$lookValueAhead"
+		  skip=true
+		else
+		  resultRef[$flag]='true'
+		fi
+	else
+		justArgumentsRef+=($flag)
+	fi 
+	done
+}
