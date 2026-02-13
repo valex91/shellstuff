@@ -8,7 +8,7 @@ source $shell_stuff_dir/lib/validators
 path=$(requireArgument "$1" 'need a path as argument') || exit 1
 
 
-readarray -t extensions < <(ls $path | cut -s -d . -f 2-)
+readarray -t extensions < <(ls $path | awk -F. 'index($0, ".") && NF > 1 {print $NF}')
 if [[ ${#extensions[@]} ==  0 ]]; then
 	felttip green "No ordering needed"
 	exit 0
@@ -19,10 +19,9 @@ felttip green "found ${#extensions[@]} extensions: $(echo "${extensions[*]}" | t
 unset IFS
 
 
-
 for ext in ${extensions[@]}; do
 	mkdir $ext 2>/dev/null
-	mv *.$ext $ext
+	mv *.$ext $ext 2>/dev/null
 done
 
 felttip green "Content of $1 has been ordered in folders by extension"
